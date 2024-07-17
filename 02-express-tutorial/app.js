@@ -119,14 +119,16 @@
 //-----------------------------------------------------------------------------------------------//
 //middeware
 import express from "express";
-
+import morgan from "morgan";
 const app = express();
+
 import logger from "./logger.js";
 import authorize from "./authorized.js";
+
 // any path after the api will receive the logger
 // app.use("/api", logger);
-
-app.use(authorize, logger);
+app.use(morgan("tiny"));
+// app.use(authorize, logger);
 app.get("/", (req, res) => {
   res.send("home page");
 });
@@ -139,7 +141,7 @@ app.get("/shop", (req, res) => {
   res.send("home page");
 });
 
-app.get("/api/items", (req, res) => {
+app.get("/api/items", [authorize, logger], (req, res) => {
   res.send("about page");
 });
 app.listen(5000, () => {
