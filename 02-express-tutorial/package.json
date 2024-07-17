@@ -1,6 +1,7 @@
 {
   "name": "2-express-tutorial",
   "version": "1.0.0",
+  "types": "module",
   "description": "",
   "type": "module",
   "main": "app.js",
